@@ -1,0 +1,27 @@
+.ControlBtn {
+  display: inline-block;
+  width: 200px;
+  margin-left: 10%;
+
+  .DeleteBtn {
+    background-image: url('./assets/Trash.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 27px;
+    height: 28px;
+    border: 0;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+
+  .DuplicateBtn {
+    background-image: url('./assets/Duplicate.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 27px;
+    height: 28px;
+    border: 0;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+}

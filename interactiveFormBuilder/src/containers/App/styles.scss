@@ -1,0 +1,25 @@
+@import '../../theme/variables';
+
+body {
+  background-color: $calm-blue;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.App {
+  color: $color-white;
+
+  .header {
+    overflow: auto;
+    padding: 15px;
+
+    img {
+      float: left;
+      height: 70px;
+      margin-right: 1em;
+    }
+  }
+
+  input::placeholder {
+    color: #555;
+  }
+}

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: interactive-form
+  labels:
+    app: form
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: form
+  template:
+    metadata:
+      labels:
+        app: form
+    spec:
+      containers:
+      - name: form
+        image: azimuth3d/
+        resources:
+          limits:
+            memory: "700Mi"
+            cpu: "900m"
+          requests:
+            memory: "200Mi"
+            cpu: "300m"
+        ports:
+        - containerPort: 3000

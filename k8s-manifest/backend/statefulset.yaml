@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  terminationGracePeriodSeconds: 10
+  serviceName: backend
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: mongodb
+          image: azimuth3d/mongodb-backend
+          command:
+            - mongod
+            - "--replSet"
+            - rs0
+            - "--smallfiles"
+            - "--norealloc"
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: db-storage
+              mountPath: /data/db
+          
+  volumeClaimTemplates:
+   - metadata:
+       name: backend
+     spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "local-storage"
+        resources:
+        requests:
+          storage: 300Mi
+
+          
+
+
+     

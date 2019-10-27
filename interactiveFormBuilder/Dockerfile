@@ -17,11 +17,10 @@ RUN npm install && \
   npm install node-gyp -g && \
   npm rebuild node-sass --force
 
-# RUN apk del build-dependencies
+RUN npm prune production
 
 ADD . /usr/local/app
 CMD [ "npm", "run", "start:production:docker" ]
-EXPOSE 8080
-EXPOSE 3000
+
 
 

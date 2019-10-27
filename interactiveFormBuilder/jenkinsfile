@@ -35,9 +35,26 @@ podTemplate(label: label, containers:[
 
 
 stages {
+  stage('test') {
+    steps{
+      container('')
+    }
+  }
   stage('build') {
     steps {
-      container('node')
+      container('docker') {
+        sh('docker build . -t azimuth3d/interactive-form')
+      }
     }
- }
+  }
+  stage('deploy') {
+    when {
+      branch 'development'
+    }
+    steps {
+      container('kubectl') {
+         sh './development-deploy.sh'
+      }
+    }
+  }
 }

@@ -17,6 +17,7 @@ spec:
       containers:
       - name: fluentd
         image: azimuth3d/fluentd-es
+        imagePullPolicy: Always
         env:
           - name: FLUENT_ELASTICSEARCH_HOST
             value: "elastic-search"

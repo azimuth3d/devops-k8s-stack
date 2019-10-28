@@ -39,7 +39,7 @@ spec:
             fieldRef:
                fieldPath: metadata.name
         - name: discovery.seed_hosts
-          value: "elastic-search-0.elastic-cluster,elastic-search-1 .elastic-cluster,elastic-search-2.elastic-cluster"
+          value: "elastic-search-0.elastic-cluster,elastic-search-1.elastic-cluster,elastic-search-2.elastic-cluster"
         - name: cluster.initial_master_nodes
           value: "elastic-search-0,elastic-search-1,elastic-search-2"
         - name: ES_JAVA_OPTS

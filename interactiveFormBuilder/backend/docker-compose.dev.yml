@@ -10,6 +10,7 @@ services:
     api:
       build: .
       image: khomkrit/form-api
+      command: ["npm","run","dev"]
       volumes:
         - ./:/usr/local/app:Z
         - /usr/local/app/node_modules

@@ -15,7 +15,7 @@ spec:
         app: kibana
     spec:
       containers:
-        - name: "kibana"
+        - name: kibana
           image: blacktop/kibana:7.3
           resources:
               limits:

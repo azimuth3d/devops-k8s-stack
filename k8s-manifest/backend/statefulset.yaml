@@ -1,24 +1,23 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: backend
+  name: mongo
   labels:
-    app: backend
+    app: mongo
 spec:
   terminationGracePeriodSeconds: 10
-  serviceName: backend
+  serviceName: mongo
   replicas: 3
   selector:
     matchLabels:
-      app: backend
+      app: mongo
   template:
     metadata:
       labels:
-        app: backend
+        app: mongo
     spec:
       containers:
-        - name: mongodb
-          image: azimuth3d/mongodb-backend
+        - name: mongo
           command:
             - mongod
             - "--replSet"
@@ -30,16 +29,20 @@ spec:
           volumeMounts:
             - name: db-storage
               mountPath: /data/db
-          
+        - name: mongo-sidecar
+          image: cvallance/mongo-k8s-sidecar
+          env:
+            - name: MONGO_SIDECAR_POD_LABELS
+              value: "role=mongo,environment=test"  
   volumeClaimTemplates:
    - metadata:
-       name: backend
+       name: mongo
      spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: "local-storage"
         resources:
-        requests:
-          storage: 300Mi
+          requests:
+            storage: 300Mi
 
           
 

@@ -12,7 +12,11 @@ server.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 server.use(bodyParser.json());
 
-mongoose.connect('mongodb://db:27017/');
+if( process.env.NODE_EMV === "development") {
+  mongoose.connect('mongodb://db:27017/');
+} else if( process.env.NODE_ENV === "production") {
+  mongoose("mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/")
+}
 
 const db = mongoose.connection;
 const collection = db.collection('Forms');

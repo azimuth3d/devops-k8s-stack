@@ -7,5 +7,5 @@ ADD package.json package-lock.json ./
 RUN npm install
 
 ADD . /usr/local/app
-CMD ["npm","run","dev"]
+CMD ["npm","run","production"]
 EXPOSE 5000

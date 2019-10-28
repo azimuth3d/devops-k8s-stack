@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: form
-        image: azimuth3d/
+        image: azimuth3d/form-builder:latest
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "700Mi"

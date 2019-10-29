@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -19,7 +20,12 @@ server.use(cors());
 server.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 server.use(bodyParser.json());
-mongoose.connect('mongodb://db:27017/');
+if (process.env.NODE_EMV === "development") {
+    mongoose.connect('mongodb://db:27017/');
+}
+else if (process.env.NODE_ENV === "production") {
+    mongoose.connect("mongodb://mongo-0.mongo.default.svc.cluster.local:27017/");
+}
 const db = mongoose.connection;
 const collection = db.collection('Forms');
 db.on('error', () => {
@@ -28,12 +34,12 @@ db.on('error', () => {
 db.once('open', () => {
     console.log('+++ Connected to mongoose');
 });
-server.use('/board', (req, res) => __awaiter(this, void 0, void 0, function* () {
+server.use('/board', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let form = new forms_model_1.default();
     let formData = yield forms_model_1.default.find();
     res.send(formData);
 }));
-server.use('/save', (req, res) => __awaiter(this, void 0, void 0, function* () {
+server.use('/save', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /* let newForm = {
       title: 'Form Title',
       numForm: 2,

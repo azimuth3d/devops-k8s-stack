@@ -5,9 +5,8 @@ metadata:
   labels:
     app: mongo
 spec:
-  terminationGracePeriodSeconds: 10
   serviceName: mongo
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: mongo
@@ -18,16 +17,18 @@ spec:
     spec:
       containers:
         - name: mongo
+          image: mvertes/alpine-mongo
           command:
             - mongod
             - "--replSet"
             - rs0
             - "--smallfiles"
-            - "--norealloc"
+            - "--bind_ip"
+            - 0.0.0.0
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: db-storage
+            - name: mongo-storage
               mountPath: /data/db
         - name: mongo-sidecar
           image: cvallance/mongo-k8s-sidecar
@@ -36,13 +37,12 @@ spec:
               value: "role=mongo,environment=test"  
   volumeClaimTemplates:
    - metadata:
-       name: mongo
+       name: mongo-storage
      spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: "local-storage"
         resources:
           requests:
-            storage: 300Mi
+            storage: 50Mi
 
           
 

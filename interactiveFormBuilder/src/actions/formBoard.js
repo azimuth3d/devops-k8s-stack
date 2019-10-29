@@ -6,6 +6,7 @@ import type {
   FormBoard as FormBoardType,
 } from '../types';
 import { CHANGE_BOARD_TITLE, LOAD_BOARD, SAVE_BOARD } from './contants';
+import API_ENDPOINT from '../config/constant';
 
 export const changeBoardTitle = (changeTitle: string): ThunkAction => (
   dispatch: Dispatch
@@ -19,7 +20,7 @@ export const changeBoardTitle = (changeTitle: string): ThunkAction => (
 export const loadBoard = (userId: string): ThunkAction => async (
   dispatch: Dispatch
 ) => {
-  const board = await axios.get('http://localhost:5000/board');
+  const board = await axios.get(`${API_ENDPOINT}/board`);
   if (board) {
     dispatch({
       type: LOAD_BOARD,
@@ -38,7 +39,7 @@ export const loadBoard = (userId: string): ThunkAction => async (
 export const saveForms = (board: FormBoardType): ThunkAction => async (
   dispatch: Dispatch
 ) => {
-  const result = await axios.post('http://localhost:5000/save', {
+  const result = await axios.post(`${API_ENDPOINT}/save`, {
     data: board,
     formId: 'random',
   });

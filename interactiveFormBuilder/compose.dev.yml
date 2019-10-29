@@ -20,6 +20,9 @@ services:
       - /usr/local/app/node_modules/
     ports:
       - '5000:5000'
+    environment:
+      NODE_ENV: development
+    command: ["npm","run","dev"]
     depends_on:
       - db
   db:

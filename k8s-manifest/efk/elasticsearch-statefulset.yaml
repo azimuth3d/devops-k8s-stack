@@ -4,7 +4,7 @@ metadata:
   name: elastic-search
 spec:
   serviceName: elastic-search
-  replicas: 3
+  replicas: 1
   selector:
    matchLabels: 
      app: elastic-search
@@ -29,7 +29,7 @@ spec:
           name: inter-node
           protocol: TCP
         volumeMounts:
-        - name: data 
+        - name: es-data 
           mountPath: /usr/share/elasticsearch/data
         env:
         - name: cluster.name
@@ -39,9 +39,9 @@ spec:
             fieldRef:
                fieldPath: metadata.name
         - name: discovery.seed_hosts
-          value: "elastic-search-0.elastic-cluster,elastic-search-1.elastic-cluster,elastic-search-2.elastic-cluster"
+          value: "elastic-search-0.elastic-cluster"
         - name: cluster.initial_master_nodes
-          value: "elastic-search-0,elastic-search-1,elastic-search-2"
+          value: "elastic-search-0"
         - name: ES_JAVA_OPTS
           value: "-Xms512m -Xms512m"
       initContainers:
@@ -51,25 +51,24 @@ spec:
           securityContext:
             privileged: true
           volumeMounts:
-          - name: data
+          - name: es-data
             mountPath: /usr/share/elasticsearch/data 
-        - name: increase-vm-max-map
-          image: busybox
-          command: ["sysctl","-w","vm.max_map_count=262144"]
+   #     - name: increase-vm-max-map
+   #       image: busybox
+   #       command: ["sysctl","-w","vm.max_map_count=262144"]
         - name: increase-fd-ulimit
           image: busybox
           command: ["sh","-c","ulimit -n 65536"]
           securityContext:
-              privilieged: true 
+            privileged: true
   volumeClaimTemplates:
     - metadata:
-        name: elastic-search
+        name: es-data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: "local-storage"
         resources:
           requests:
-            storage: 300Mi
+            storage: 100Mi
 
              
      

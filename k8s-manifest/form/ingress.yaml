@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: form-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: form.devops.k8s
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: form
+              servicePort: 80

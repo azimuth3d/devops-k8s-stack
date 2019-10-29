@@ -20,11 +20,12 @@ server.use(cors());
 server.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 server.use(bodyParser.json());
-if (process.env.NODE_EMV === "development") {
+if (process.env.NODE_ENV === "development") {
+    console.log('connect to development db');
     mongoose.connect('mongodb://db:27017/');
 }
 else if (process.env.NODE_ENV === "production") {
-    mongoose.connect("mongodb://mongo-0.mongo.default.svc.cluster.local:27017/");
+    mongoose.connect("mongodb://mongo-0.mongo.default.svc.cluster.local,mongo-1.mongo.default.svc.cluster.local:27017/");
 }
 const db = mongoose.connection;
 const collection = db.collection('Forms');
@@ -38,6 +39,7 @@ server.use('/board', (req, res) => __awaiter(void 0, void 0, void 0, function* (
     let form = new forms_model_1.default();
     let formData = yield forms_model_1.default.find();
     res.send(formData);
+    console.log(formData);
 }));
 server.use('/save', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /* let newForm = {

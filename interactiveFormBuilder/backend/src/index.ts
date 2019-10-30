@@ -16,7 +16,8 @@ if(process.env.NODE_ENV === "development") {
   console.log('connect to development db')
   mongoose.connect('mongodb://db:27017/');
 } else if( process.env.NODE_ENV === "production") {
-  mongoose.connect("mongodb://mongo-0.mongo.default.svc.cluster.local,mongo-1.mongo.default.svc.cluster.local:27017/")
+ // mongodb://server:port/db?replicaSet=name
+  mongoose.connect("mongodb://mongo.default.svc.cluster.local:27017/")
 }
 
 const db = mongoose.connection;

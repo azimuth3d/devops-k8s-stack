@@ -13,3 +13,7 @@ spec:
             backend:
               serviceName: form
               servicePort: 80
+          - path: /api
+            backend:
+              serviceName: backend
+              servicePort: 5000

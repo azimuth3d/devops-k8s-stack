@@ -35,7 +35,7 @@ server.use('/board', async (req, res) => {
   let form = new FormModel();
   let formData = await FormModel.find();
   res.send(formData);
-  console.log(formData)
+  console.log(formData) 
 });
 
 server.use('/save', async (req, res) => {

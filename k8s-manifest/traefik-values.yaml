@@ -1,5 +1,5 @@
 dashboard:
-  enabled: true
+  enabled: false
   domain: devops.k8s
 kubernetes:
   namespaces:

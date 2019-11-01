@@ -7,5 +7,6 @@ spec:
     app: form
   ports:
   - protocol: TCP
-    port: 80
+    port: 8080
     targetPort: 8080
+  clusterIP: None

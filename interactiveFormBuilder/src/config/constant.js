@@ -4,5 +4,3 @@ const API_ENDPOINT =
     : 'http://api.devops.k8s';
 
 export default API_ENDPOINT;
-
-

@@ -16,8 +16,7 @@ if(process.env.NODE_ENV === "development") {
   console.log('connect to development db')
   mongoose.connect('mongodb://db:27017/');
 } else if( process.env.NODE_ENV === "production") {
- // mongodb://server:port/db?replicaSet=name
-  mongoose.connect("mongodb://mongo.default.svc.cluster.local:27017/")
+  mongoose.connect("mongodb://mongo-0.mongo,mongo-1.mongo:27017/")
 }
 
 const db = mongoose.connection;
@@ -68,16 +67,6 @@ server.use('/save', async (req, res) => {
   const newForm = req.body.data;
   const Id = req.body.formId;
   console.log(` New form ${JSON.stringify(newForm)}`);
-  // const instance = new collection(newForm);
-  /*
-  try {
-    const result = await instance.save();
-    console.log(result.id);  // this will be the new created ObjectId
-    res.send(`Successful to insert new form id ${result.id}`);
-  } catch(err => {
-    res.send(err);
-  });
-  */
   FormModel.findOneAndUpdate(
     { uid: Id }, // find a document with that filter
     newForm, // document to insert when nothing was found

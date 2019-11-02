@@ -16,7 +16,7 @@ if(process.env.NODE_ENV === "development") {
   console.log('connect to development db')
   mongoose.connect('mongodb://db:27017/');
 } else if( process.env.NODE_ENV === "production") {
-  mongoose.connect("mongodb://mongo-0.mongo,mongo-1.mongo:27017/")
+  mongoose.connect("mongodb://mongo-0.mongo,mongo-1.mongo:27017/?replicaSet=rs0")
 }
 
 const db = mongoose.connection;
@@ -67,6 +67,7 @@ server.use('/save', async (req, res) => {
   const newForm = req.body.data;
   const Id = req.body.formId;
   console.log(` New form ${JSON.stringify(newForm)}`);
+  delete newForm.__v
   FormModel.findOneAndUpdate(
     { uid: Id }, // find a document with that filter
     newForm, // document to insert when nothing was found

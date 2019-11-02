@@ -1,1 +1,2 @@
-helm install --name traefik stable/traefik --values k8s-manifest/traefik-values.yaml
+helm init
+helm install --name nginx-ingress stable/nginx-ingress

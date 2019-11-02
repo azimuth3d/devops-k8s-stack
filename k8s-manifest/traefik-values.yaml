@@ -1,7 +1,0 @@
-dashboard:
-  enabled: false
-  domain: devops.k8s
-kubernetes:
-  namespaces:
-    - default
-    - kube-system

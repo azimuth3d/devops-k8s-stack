@@ -1,9 +1,8 @@
 ##DevOps stack on k8s 
 
-It 's a simple stack in kubernetes cluster deploy with form builder application
-
-when run setup mongodb statefulset complete need to execute 
-
+Simple stack in kubernetes cluster deploy with form builder application when run setup mongodb statefulset complete 
+when you create statefulset of MongoDB already , you need to initilize mongodb replication
+with 
  ```
  kubectl exec mongo-0 mongo 
  >
@@ -15,5 +14,5 @@ when run setup mongodb statefulset complete need to execute
 
 ### Setup ingress controller for install on premise or docker desktop
 
-- add your domain (traefik-values.yaml) into /etc/hosts  same line as localhost 
+- add your domain into /etc/hosts same line as localhost 
 

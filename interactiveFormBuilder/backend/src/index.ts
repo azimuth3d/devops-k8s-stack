@@ -100,5 +100,3 @@ server.use('/', (req, res) => {
 server.listen(5000, () => {
   console.log('Listen for port 5000');
 });
-
-// export default setupGraphQLServer;

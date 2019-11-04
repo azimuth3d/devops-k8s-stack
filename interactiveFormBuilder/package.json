@@ -39,7 +39,7 @@
     "start": "better-npm-run start",
     "start:production": "yarn build && yarn start:prod",
     "start:prod": "better-npm-run start:prod",
-    "start:production:docker": "yarn build && yarn start:prod:docker",
+    "start:production:docker": "yarn start:prod:docker",
     "start:development:docker": "yarn build && better-npm-run start:dev:docker",
     "start:prod:docker": "better-npm-run start:prod:docker",
     "build": "yarn clean:build && better-npm-run build",
